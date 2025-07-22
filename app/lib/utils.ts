@@ -1,0 +1,29 @@
+/**
+ * Formats a file size in bytes to a human-readable string (KB, MB, GB)
+ * @param bytes - The size in bytes
+ * @returns A formatted string with the appropriate unit (KB, MB, GB)
+ */
+export function formatSize(bytes: number): string {
+  if (bytes === 0) return '0 Bytes';
+
+  const k = 1024;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+
+  // Determine the appropriate unit by calculating the log
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+  // Format with 2 decimal places and return with the unit
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+/**
+ * Generates a UUID (Universally Unique Identifier)
+ * @returns A string representing a UUID
+ */
+export function generateUUID(): string {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    const r = Math.random() * 16 | 0;
+    const v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
